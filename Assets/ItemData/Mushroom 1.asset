@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
+  m_Name: Mushroom 1
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: "\uBC84\uC12F 1"
+  description: "\uBC84\uC12F 1\uC744 \uCC44\uC9D1\uD558\uC5EC \uC5BB\uC744 \uC218
+    \uC788\uB294 \uC790\uC6D0"
+  icon: {fileID: -4472177777327656913, guid: c17889b3625f016418d7bcb66e26fc64, type: 3}
