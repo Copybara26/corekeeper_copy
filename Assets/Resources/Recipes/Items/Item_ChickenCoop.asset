@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67452634a4443c43b23726b636d7b78, type: 3}
+  m_Name: Item_ChickenCoop
+  m_EditorClassIdentifier: Assembly-CSharp::ItemRecipe
+  resultItem: {fileID: 11400000, guid: 72ff5368e0c7e6c418d300c56b26c441, type: 2}
+  resultAmount: 1
+  ingredients:
+  - item: {fileID: 11400000, guid: 5b4d9c1d9db18b440b4d45f6bab62a97, type: 2}
+    amount: 15
