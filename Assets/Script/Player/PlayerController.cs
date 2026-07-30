@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("이동 설정")]
     public float moveSpeed = 5f;
+    public bool canMove = true; // 이동 허용 여부
 
     [Header("채집 & 타격 설정 (3x3 사각형 영역)")]
     [Tooltip("3x3 사각형 가로/세로 크기 (1타일이 1이면 3.0 정도가 3x3 영역)")]
@@ -21,16 +22,31 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        canMove = true; // 게임 시작 시 무조건 이동 가능하도록 보장
     }
 
     void FixedUpdate()
     {
+        // canMove가 false면 플레이어 이동을 멈춤
+        if (!canMove)
+        {
+            rb.linearVelocity = Vector2.zero; // Unity 6 (2022 이하면 rb.velocity = Vector2.zero)
+            return;
+        }
+
         rb.linearVelocity = movement * moveSpeed;
     }
 
     // 키보드/패드 이동 입력
     public void OnMove(InputValue value)
     {
+        if (!canMove)
+        {
+            movement = Vector2.zero;
+            UpdateAnimator(lastLookDirection, 0f);
+            return;
+        }
+
         movement = value.Get<Vector2>();
 
         if (movement.magnitude > 0.01f)
@@ -46,9 +62,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // 마우스 좌클릭 또는 화면 터치 시
+        // 마우스 좌클릭 시 (canMove 여부 상관없이 마우스 입력은 받고 내부에서 처리)
         if (Input.GetMouseButtonDown(0))
         {
+            // 제작창이 켜져 있을 때(!canMove)는 땅이나 자원을 때리지 않음
+            if (!canMove) return;
+
             HandleTouchOrClick();
         }
     }
@@ -56,25 +75,23 @@ public class PlayerController : MonoBehaviour
     // 마우스/터치 선택 처리
     private void HandleTouchOrClick()
     {
-        // 1. 화면 클릭 위치를 World 좌표로 변환
+        if (Camera.main == null) return;
+
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 targetPos = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
         Vector2 playerPos = (Vector2)transform.position;
 
-        // 2. 클릭한 위치가 플레이어 중심 3x3 사각형 범위 내인지 확인
         Bounds attackBounds = new Bounds(playerPos, areaSize);
 
         if (attackBounds.Contains(targetPos))
         {
-            // 3. 클릭한 방향으로 플레이어 시선 돌리기
             Vector2 direction = targetPos - playerPos;
-            if (direction.magnitude > 0.1f) // 플레이어 본인 위치가 아닌 경우
+            if (direction.magnitude > 0.1f)
             {
                 lastLookDirection = Get4WayDirection(direction);
                 UpdateAnimator(lastLookDirection, 0f);
             }
 
-            // 4. 클릭한 지점에 Object(자원)가 있는지 검사하여 타격
             Collider2D hit = Physics2D.OverlapPoint(targetPos, resourceLayer);
             if (hit != null)
             {
@@ -87,7 +104,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // 대각선 입력을 상/하/좌/우 4방향 정밀 벡터로 변환하는 함수
     private Vector2 Get4WayDirection(Vector2 dir)
     {
         dir.Normalize();
@@ -101,7 +117,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // 애니메이터 파라미터 갱신
     private void UpdateAnimator(Vector2 dir, float speed)
     {
         if (animator != null)
@@ -112,7 +127,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Scene 뷰에서 3x3 빨간색 사각형 범위 시각화
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
