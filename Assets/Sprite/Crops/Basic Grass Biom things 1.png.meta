@@ -704,7 +704,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 16
-        width: 32
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -984,6 +984,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Basic Grass Biom things 1_35
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee9133a8d0765c74796d4a3657889cf7
+      internalID: 1533130717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1029,6 +1051,7 @@ TextureImporter:
       Basic Grass Biom things 1_32: 3780151730980557477
       Basic Grass Biom things 1_33: -6432598374296404779
       Basic Grass Biom things 1_34: -745638010909508545
+      Basic Grass Biom things 1_35: 1533130717
       Basic Grass Biom things 1_4: -4472177777327656913
       Basic Grass Biom things 1_5: 6427160142443645130
       Basic Grass Biom things 1_6: 3387735869382985258
