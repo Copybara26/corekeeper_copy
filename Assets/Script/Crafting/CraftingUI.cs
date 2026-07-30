@@ -23,7 +23,7 @@ public class CraftingUI : MonoBehaviour
     public Button closeButton;
 
     [Header("작업대 감지 설정")]
-    public PlayerController player; // 플레이어 참조
+    public PlayerController player;
 
     private List<CraftingSlotUI> spawnedSlots = new List<CraftingSlotUI>();
     private ItemRecipe selectedRecipe;
@@ -42,18 +42,12 @@ public class CraftingUI : MonoBehaviour
         if (closeButton != null)
             closeButton.onClick.AddListener(CloseCraftingUI);
 
+        // 시작 시 제작창을 닫으면서 플레이어 이동을 풀어줍니다!
         CloseCraftingUI();
     }
 
     private void Update()
     {
-        // 'C' 키를 누르면 제작창 토글
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ToggleCraftingUI();
-        }
-
-        // 제작창이 열려있는 동안 작업대 범위를 벗어나면 자동으로 닫음
         if (craftingWindow.activeSelf)
         {
             if (!IsNearCraftingStation())
@@ -64,28 +58,23 @@ public class CraftingUI : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 플레이어 주변 (areaSize 범위 내)에 작업대(CraftingStation)가 있는지 2D로 검사
-    /// </summary>
     public bool IsNearCraftingStation()
     {
-        // 플레이어가 없으면 자동 검색
         if (player == null)
         {
             player = FindFirstObjectByType<PlayerController>();
             if (player == null) return false;
         }
 
-        // PlayerController의 위치와 areaSize 영역을 가져와 검사
-        Bounds checkBounds = new Bounds(player.transform.position, player.areaSize);
+        Vector2 center = player.transform.position;
+        Vector2 size = player.areaSize;
 
-        // 범위 내의 모든 2D Collider 탐색
-        Collider2D[] hits = Physics2D.OverlapBoxAll(checkBounds.center, checkBounds.size, 0f);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(center, size, 0f);
         foreach (var hit in hits)
         {
-            if (hit.GetComponent<CraftingStation>() != null)
+            if (hit.GetComponent<CraftingStation>() != null || hit.name.Contains("CraftingStation"))
             {
-                return true; // 범위 안에 작업대가 있음!
+                return true;
             }
         }
 
@@ -114,12 +103,19 @@ public class CraftingUI : MonoBehaviour
     public void OpenCraftingUI()
     {
         craftingWindow.SetActive(true);
+
+        if (player == null) player = FindFirstObjectByType<PlayerController>();
+        if (player != null) player.canMove = false; // 제작창 열림 -> 이동 금지
+
         RefreshUI();
     }
 
     public void CloseCraftingUI()
     {
         craftingWindow.SetActive(false);
+
+        if (player == null) player = FindFirstObjectByType<PlayerController>();
+        if (player != null) player.canMove = true; // 제작창 닫힘 -> 이동 허용
     }
 
     public void RefreshUI()
@@ -171,6 +167,9 @@ public class CraftingUI : MonoBehaviour
         if (selectedItemName != null) selectedItemName.text = recipe.resultItem.itemName;
         if (selectedItemDescription != null) selectedItemDescription.text = recipe.resultItem.description;
 
+        bool isNear = IsNearCraftingStation();
+        bool canCraft = CraftingManager.Instance.CanCraft(recipe);
+
         if (ingredientsText != null)
         {
             string ingText = "필요 재료:\n";
@@ -183,10 +182,18 @@ public class CraftingUI : MonoBehaviour
             ingredientsText.text = ingText;
         }
 
+        // 제작 불가능(재료 부족 또는 작업대 x) 시 버튼 숨김
+        bool shouldShowButton = canCraft && isNear;
+
         if (craftConfirmButton != null)
         {
-            // 재료 충분 + 작업대 근처 조건 만족 시 버튼 활성화
-            craftConfirmButton.interactable = CraftingManager.Instance.CanCraft(recipe) && IsNearCraftingStation();
+            craftConfirmButton.gameObject.SetActive(shouldShowButton);
+            craftConfirmButton.interactable = shouldShowButton;
+        }
+
+        if (!shouldShowButton)
+        {
+            Debug.Log($"[제작 버튼 숨김] 레시피: {recipe.resultItem.itemName} | 작업대 근처? {isNear} | 재료 충분? {canCraft}");
         }
     }
 
@@ -197,7 +204,11 @@ public class CraftingUI : MonoBehaviour
         if (selectedItemName != null) selectedItemName.text = "";
         if (selectedItemDescription != null) selectedItemDescription.text = "";
         if (ingredientsText != null) ingredientsText.text = "";
-        if (craftConfirmButton != null) craftConfirmButton.interactable = false;
+
+        if (craftConfirmButton != null)
+        {
+            craftConfirmButton.gameObject.SetActive(false);
+        }
     }
 
     private void OnCraftButtonClicked()

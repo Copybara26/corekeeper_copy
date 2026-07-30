@@ -31,25 +31,26 @@ public class CraftingManager : MonoBehaviour
         if (recipe == null || recipe.resultItem == null)
             return false;
 
-        // 인벤토리 싱글톤이 없으면 제작 불가
         if (Inventory.Instance == null)
         {
-            Debug.LogWarning("Inventory.Instance가 존재하지 않습니다!");
+            Debug.LogWarning("[CraftingManager] Inventory.Instance가 null입니다! 씬에 Inventory 오브젝트가 있는지 확인하세요.");
             return false;
         }
 
-        // 모든 재료 수량 검사
         if (recipe.ingredients != null)
         {
             foreach (var ingredient in recipe.ingredients)
             {
                 if (ingredient.item == null) continue;
 
-                // 실제 인벤토리에서 아이템 보유 수량 조회
                 int currentAmount = Inventory.Instance.GetItemAmount(ingredient.item);
+
+                // 💡 콘솔창에서 보유 수량과 필요 수량을 확인해보세요!
+                // Debug.Log($"재료 검사 - {ingredient.item.itemName}: 보유량({currentAmount}) / 필요량({ingredient.amount})");
+
                 if (currentAmount < ingredient.amount)
                 {
-                    return false; // 재료 하나라도 부족하면 제작 불가
+                    return false; // 재료 부족
                 }
             }
         }
