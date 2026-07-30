@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
+  m_Name: wheat
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: "\uBC00"
+  description: "\uBC00 \uC791\uBB3C\uC744 \uC218\uD655\uD558\uC5EC \uC5BB\uC744 \uC218
+    \uC788\uB294 \uC694\uB9AC \uC7AC\uB8CC"
+  icon: {fileID: -5659601288151787448, guid: 4a39918051142104e9022cc6a25abecc, type: 3}
