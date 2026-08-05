@@ -47,6 +47,11 @@ public class InventoryUI : MonoBehaviour
             {
                 createdSlots[i].ClearSlot();
             }
+
+            bool isSelected =
+                i == Inventory.Instance.SelectedSlotIndex;
+
+            createdSlots[i].SetSelected(isSelected);
         }
     }
 }

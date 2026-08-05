@@ -6,6 +6,7 @@ public class InventorySlotUI : MonoBehaviour
 {
     [SerializeField] private Image itemIcon;
     [SerializeField] private TMP_Text amountText;
+    [SerializeField] private GameObject selectionFrame;
 
     public void SetSlot(InventorySlotData slotData)
     {
@@ -27,5 +28,13 @@ public class InventorySlotUI : MonoBehaviour
         itemIcon.sprite = null;
 
         amountText.text = string.Empty;
+    }
+
+    public void SetSelected(bool selected)
+    {
+        if (selectionFrame != null)
+        {
+            selectionFrame.SetActive(selected);
+        }
     }
 }

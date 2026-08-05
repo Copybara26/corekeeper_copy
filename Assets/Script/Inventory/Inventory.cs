@@ -11,6 +11,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private ItemData stone;
     [SerializeField] private ItemData iron;
 
+    [SerializeField] private ItemData TomatoSeed;
+    [SerializeField] private ItemData WheatSeed;
+
     [Header("현재 인벤토리")]
     [SerializeField] private List<InventorySlotData> slots = new();
 
@@ -31,23 +34,65 @@ public class Inventory : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        SelectedSlotIndex = 0;
+
+        AddItem(TomatoSeed, 5);
+        AddItem(WheatSeed, 5);
+
+        OnInventoryChanged?.Invoke();
+    }
+
+    public int SelectedSlotIndex { get; private set; } = 0;
+
+    public ItemData SelectedItem
+    {
+        get
+        {
+            if (SelectedSlotIndex < 0 ||
+                SelectedSlotIndex >= slots.Count)
+            {
+                return null;
+            }
+
+            return slots[SelectedSlotIndex].item;
+        }
+    }
+
     private void Update()
     {
-        // 테스트용 단축키
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1)) SelectSlot(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) SelectSlot(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) SelectSlot(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) SelectSlot(3);
+        if (Input.GetKeyDown(KeyCode.Alpha5)) SelectSlot(4);
+        if (Input.GetKeyDown(KeyCode.Alpha6)) SelectSlot(5);
+        if (Input.GetKeyDown(KeyCode.Alpha7)) SelectSlot(6);
+        if (Input.GetKeyDown(KeyCode.Alpha8)) SelectSlot(7);
+        if (Input.GetKeyDown(KeyCode.Alpha9)) SelectSlot(8);
+    }
+
+    public void SelectSlot(int index)
+    {
+        if (index < 0 || index >= MAX_SLOT)
         {
-            AddItem(wood, 1);
+            return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        SelectedSlotIndex = index;
+
+        if (SelectedItem != null)
         {
-            AddItem(stone, 1);
+            Debug.Log($"{index + 1}번 슬롯 선택: {SelectedItem.itemName}");
+        }
+        else
+        {
+            Debug.Log($"{index + 1}번 빈 슬롯 선택");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            AddItem(iron, 1);
-        }
+        // 선택 테두리도 새로 갱신
+        OnInventoryChanged?.Invoke();
     }
 
     public void AddItem(ItemData item, int amount)
