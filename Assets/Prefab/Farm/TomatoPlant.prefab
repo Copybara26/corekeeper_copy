@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3172512621935438636
+--- !u!1 &821244685866587845
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 598854000193914050}
-  - component: {fileID: 4992572008514011268}
-  - component: {fileID: 5712432058808809679}
-  m_Layer: 3
-  m_Name: Free_Chicken_House_0
+  - component: {fileID: 8791168971743917032}
+  - component: {fileID: 1140848155234272027}
+  - component: {fileID: 3824778451852904133}
+  - component: {fileID: 6947394772536370033}
+  m_Layer: 0
+  m_Name: TomatoPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &598854000193914050
+--- !u!4 &8791168971743917032
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3172512621935438636}
+  m_GameObject: {fileID: 821244685866587845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.026, y: 0.187, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4992572008514011268
+--- !u!212 &1140848155234272027
 SpriteRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3172512621935438636}
+  m_GameObject: {fileID: 821244685866587845}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,28 +79,28 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -183099799
-  m_SortingLayer: 7
-  m_SortingOrder: 0
+  m_SortingLayerID: -431740185
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7947428505529812925, guid: eb3c22aa3da71344fa14cd103ae3297a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
+  m_Sprite: {fileID: -1361314268720151567, guid: 4a39918051142104e9022cc6a25abecc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2.4}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!61 &5712432058808809679
+--- !u!61 &3824778451852904133
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3172512621935438636}
+  m_GameObject: {fileID: 821244685866587845}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -123,19 +124,48 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.035500526}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.4}
-    newSize: {x: 2, y: 2.4}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2, y: 2.4710011}
+  m_Size: {x: 1.1, y: 1.1}
   m_EdgeRadius: 0
+--- !u!114 &6947394772536370033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821244685866587845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ae9ff9349bca384d805af4867d77157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Crop
+  growthSprites:
+  - {fileID: -1361314268720151567, guid: 4a39918051142104e9022cc6a25abecc, type: 3}
+  - {fileID: 6325485877500199750, guid: 4a39918051142104e9022cc6a25abecc, type: 3}
+  - {fileID: -8709406779607625839, guid: 4a39918051142104e9022cc6a25abecc, type: 3}
+  - {fileID: -8097741200915394387, guid: 4a39918051142104e9022cc6a25abecc, type: 3}
+  timePerStage: 10
+  cropItem: {fileID: 11400000, guid: a270b707ab3aaa14d992aeb8e5199e22, type: 2}
+  seedItem: {fileID: 11400000, guid: 1ab9f8f9863ad0f4c927a63b9aa6affd, type: 2}
+  harvestDrops:
+  - item: {fileID: 11400000, guid: a270b707ab3aaa14d992aeb8e5199e22, type: 2}
+    minAmount: 2
+    maxAmount: 3
+    chance: 100
+  - item: {fileID: 11400000, guid: 1ab9f8f9863ad0f4c927a63b9aa6affd, type: 2}
+    minAmount: 1
+    maxAmount: 2
+    chance: 100

@@ -6,7 +6,7 @@ public class BuildingManager : MonoBehaviour
 
     [Header("설치할 건물")]
     [SerializeField] private GameObject chickenHousePrefab;
-    [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField] private LayerMask ResourceLayer;
 
     [Header("설치 가능 영역 검사")]
     [SerializeField] private Vector2 placementCheckOffset = new Vector2(0f, -0.5f);
@@ -124,7 +124,7 @@ public class BuildingManager : MonoBehaviour
             checkPosition,
             placementCheckSize,
             0f,
-            obstacleLayer
+            ResourceLayer
         );
 
         canPlace = hit == null;
