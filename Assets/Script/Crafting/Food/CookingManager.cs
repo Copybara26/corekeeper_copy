@@ -30,7 +30,6 @@ public class CookingManager : MonoBehaviour
 
         foreach (var recipe in loadedRecipes)
         {
-            // 💡 ingredients 대신 ingredientA, ingredientB 체크로 변경!
             if (recipe.ingredientA == null || recipe.ingredientB == null)
             {
                 Debug.LogWarning($"[{recipe.name}] 레시피의 재료 아이템이 비어있어서 로드에서 제외되었습니다.");
@@ -51,8 +50,20 @@ public class CookingManager : MonoBehaviour
         Debug.Log($"총 {recipeDictionary.Count}개의 요리 레시피가 성공적으로 로드되었습니다.");
     }
 
+    // 💡 [추가] ItemData 오브젝트 자체를 넘겨받는 GetRecipe 함수
+    public CookingRecipe GetRecipe(ItemData item1, ItemData item2)
+    {
+        if (item1 == null || item2 == null) return null;
+
+        // ItemData 내부의 itemName을 가져와 기존 GetRecipe(string, string) 메서드로 전달
+        return GetRecipe(item1.itemName, item2.itemName);
+    }
+
+    // 기존 문자열 기반 GetRecipe 함수
     public CookingRecipe GetRecipe(string item1, string item2)
     {
+        if (string.IsNullOrEmpty(item1) || string.IsNullOrEmpty(item2)) return null;
+
         string key = GetRecipeKey(item1, item2);
 
         if (recipeDictionary.TryGetValue(key, out CookingRecipe recipe))

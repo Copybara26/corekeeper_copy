@@ -4,22 +4,22 @@ public class CraftingStation : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        if (CraftingUI.Instance == null) return;
-
-        // 💡 1. 제작창이 이미 켜져 있다면 작업대 클릭 이벤트를 무시 (창 닫힘 방지)
-        if (CraftingUI.Instance.craftingWindow != null && CraftingUI.Instance.craftingWindow.activeSelf)
+        // 1. 요리창이 켜져 있으면 작업대 클릭 금지
+        if (CookingUI.Instance != null && CookingUI.Instance.cookingWindow != null && CookingUI.Instance.cookingWindow.activeSelf)
         {
             return;
         }
 
-        // 💡 2. 작업대 가까이 있을 때만 제작창 열기
-        if (CraftingUI.Instance.IsNearCraftingStation())
+        // 2. 이미 제작창이 켜져 있으면 작업대 클릭 금지
+        if (CraftingUI.Instance != null && CraftingUI.Instance.craftingWindow != null && CraftingUI.Instance.craftingWindow.activeSelf)
         {
-            CraftingUI.Instance.OpenCraftingUI(); // Toggle 대신 Open으로 명확히 지정
+            return;
         }
-        else
+
+        // 3. 제작창 토글
+        if (CraftingUI.Instance != null)
         {
-            Debug.LogWarning("작업대와 거리가 너무 멀어 열 수 없습니다!");
+            CraftingUI.Instance.ToggleCraftingUI();
         }
     }
 }
