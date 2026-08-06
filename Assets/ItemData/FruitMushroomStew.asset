@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
-  m_Name: FruitBread
+  m_Name: FruitMushroomStew
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: FruitBread
-  description: "\uACFC\uC77C \uBE75"
-  icon: {fileID: 8597656116119080788, guid: 9813139256c59c848b4b5c90bfd1acc2, type: 3}
+  itemName: 
+  description: 
+  icon: {fileID: 0}
