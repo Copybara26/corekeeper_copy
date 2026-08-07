@@ -190,31 +190,52 @@ public class FarmManager : MonoBehaviour
 
             if (crop != null)
             {
-                Debug.Log($"작물 클릭: {crop.name}");
                 crop.TryHarvest();
                 return;
             }
         }
 
-        // 2순위: 갈린 땅에 심기
+        // 2순위: 베리 덤불 수확
         foreach (Collider2D hit in hits)
         {
-            FarmPlot plot = hit.GetComponent<FarmPlot>();
+            BerryBush berryBush =
+                hit.GetComponent<BerryBush>();
+
+            if (berryBush == null)
+            {
+                berryBush =
+                    hit.GetComponentInParent<BerryBush>();
+            }
+
+            if (berryBush != null)
+            {
+                Debug.Log($"베리 덤불 클릭: {berryBush.name}");
+
+                berryBush.TryHarvest();
+                return;
+            }
+        }
+
+        // 3순위: 갈린 땅에 씨앗 심기
+        foreach (Collider2D hit in hits)
+        {
+            FarmPlot plot =
+                hit.GetComponent<FarmPlot>();
 
             if (plot == null)
             {
-                plot = hit.GetComponentInParent<FarmPlot>();
+                plot =
+                    hit.GetComponentInParent<FarmPlot>();
             }
 
             if (plot != null)
             {
-                Debug.Log($"갈린 땅 클릭: {plot.name}");
                 plot.TryPlant();
                 return;
             }
         }
 
-        // 3순위: 아무것도 없으면 새 땅 갈기
+        // 4순위: 새 땅 갈기
         TryTillSoil();
     }
 

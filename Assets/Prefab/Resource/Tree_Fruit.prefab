@@ -9872,7 +9872,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -431740185
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 9133669012376425949, guid: c17889b3625f016418d7bcb66e26fc64, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9978,3 +9978,4 @@ MonoBehaviour:
     maxAmount: 2
     chance: 100
   respawnTime: 8
+  groundPoint: {fileID: 0}
