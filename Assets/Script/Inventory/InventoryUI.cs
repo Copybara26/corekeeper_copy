@@ -15,6 +15,7 @@ public class InventoryUI : MonoBehaviour
             InventorySlotUI slot =
                 Instantiate(slotPrefab, slotContainer);
 
+            slot.SetIndex(i);
             slot.ClearSlot();
 
             createdSlots.Add(slot);

@@ -9,8 +9,16 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text amountText;
     [SerializeField] private GameObject selectionFrame;
 
+    // 이 UI가 몇 번째 슬롯인지 저장
+    private int slotIndex;
+
     // [요리/상호작용 기능 추가] 현재 슬롯의 데이터 기억용 변수
     private InventorySlotData currentSlotData;
+
+    public void SetIndex(int index)
+    {
+        slotIndex = index;
+    }
 
     public void SetSlot(InventorySlotData slotData)
     {
@@ -24,7 +32,6 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 
         itemIcon.enabled = true;
         itemIcon.sprite = slotData.item.icon;
-
         amountText.text = slotData.amount.ToString();
     }
 
@@ -34,7 +41,6 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 
         itemIcon.enabled = false;
         itemIcon.sprite = null;
-
         amountText.text = string.Empty;
     }
 
@@ -45,14 +51,34 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
             selectionFrame.SetActive(selected);
         }
     }
+
     // [요리/상호작용 기능 추가] 슬롯 클릭 시 요리창으로 아이템 전달
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (currentSlotData == null || currentSlotData.item == null) return;
-
-        if (CookingUI.Instance != null && CookingUI.Instance.cookingWindow != null && CookingUI.Instance.cookingWindow.activeSelf)
+        // 마우스 왼쪽 클릭만 처리
+        if (eventData.button != PointerEventData.InputButton.Left)
         {
-            CookingUI.Instance.TryAddIngredient(currentSlotData.item);
+            return;
+        }
+
+        // 클릭한 인벤토리 슬롯 선택
+        if (Inventory.Instance != null)
+        {
+            Inventory.Instance.SelectSlot(slotIndex);
+        }
+
+        if (currentSlotData == null || currentSlotData.item == null)
+        {
+            return;
+        }
+
+        if (CookingUI.Instance != null &&
+            CookingUI.Instance.cookingWindow != null &&
+            CookingUI.Instance.cookingWindow.activeSelf)
+        {
+            CookingUI.Instance.TryAddIngredient(
+                currentSlotData.item
+            );
         }
     }
 }
