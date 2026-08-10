@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: JamBread
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: JamBread
+  description: "\uC7BC \uBE75"
+  icon: {fileID: -6013605316358289227, guid: f74b2629ff4b6cd46972518ba41c2ce6, type: 3}

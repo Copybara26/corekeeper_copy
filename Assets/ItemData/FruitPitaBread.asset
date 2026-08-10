@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: FruitPitaBread
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: Fruit Pita Bread
+  description: "\uACFC\uC77C \uD30C\uC774/\uBE75"
+  icon: {fileID: 8444149544506327597, guid: 634bec3c84247a848bad787cf30e73e5, type: 3}

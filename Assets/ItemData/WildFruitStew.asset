@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: WildFruitStew
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: Wild Fruit Stew
+  description: "\uC57C\uC0DD \uACFC\uC77C \uC2A4\uD29C"
+  icon: {fileID: -5772167597204338559, guid: 7ea3c19af591e684685b42206b8f8b56, type: 3}

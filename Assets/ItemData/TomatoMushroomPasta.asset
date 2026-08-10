@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: TomatoMushroomPasta
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: Tomato Mushroom Pasta
+  description: "\uD1A0\uB9C8\uD1A0 \uBC84\uC12F \uD30C\uC2A4\uD0C0"
+  icon: {fileID: -7754782611642097118, guid: 572ecaa56a6e9504780bcbda6dd50b98, type: 3}
