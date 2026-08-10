@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: BerryMushroomSalad
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: BerryMushroomSalad
+  description: "\uBCA0\uB9AC \uBC84\uC12F \uC0D0\uB7EC\uB4DC"
+  icon: {fileID: 5311741433570431454, guid: f522814e5d566e044ad1d3a8e0d8d066, type: 3}

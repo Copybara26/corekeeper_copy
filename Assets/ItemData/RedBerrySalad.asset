@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: RedBerrySalad
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: RedBerrySalad
+  description: "\uBD89\uC740 \uBCA0\uB9AC \uBAA8\uB4EC \uC0D0\uB7EC\uB4DC"
+  icon: {fileID: -5212104927784503337, guid: 46747eb427e3fcd40873bce079c2d717, type: 3}

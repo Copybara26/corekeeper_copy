@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: MixedMushroomSalad
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: MushroomSoup
-  description: "\uBAA8\uB4EC \uBC84\uC12F \uC218\uD504"
-  icon: {fileID: 0}
+  itemName: Mixed Mushroom Salad
+  description: "\uBAA8\uB4EC \uBC84\uC12F \uC0D0\uB7EC\uB4DC"
+  icon: {fileID: 1859310186726053386, guid: 93fe127e14346c84a9ccda2ee9ac62e6, type: 3}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: TomatoBreadPie
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: Tomato Bread/Pie
+  description: " \uD1A0\uB9C8\uD1A0 \uD30C\uC774/\uC0CC\uB4DC\uC704\uCE58"
+  icon: {fileID: -7462744093848623810, guid: 7a09349e0e980c645b905b043b5c3cf0, type: 3}

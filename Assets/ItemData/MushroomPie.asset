@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: MushroomPie
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: Mushroom Pie
+  description: "\uBC84\uC12F \uD30C\uC774/\uB9AC\uC870\uB610"
+  icon: {fileID: -2045263470437689712, guid: 658fe8b12b4a56b489ce9d9a4cfc8eac, type: 3}

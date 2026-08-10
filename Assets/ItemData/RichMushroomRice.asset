@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c41970425502fe4da7bd228725dbe7a, type: 3}
   m_Name: RichMushroomRice
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: Rich Mushroom Rice
+  description: "\uC9C4\uD55C \uBC84\uC12F \uB36E\uBC25"
+  icon: {fileID: 195168980708153974, guid: 489b2c6105597044f9ef4fb676daf48c, type: 3}
