@@ -4029,8 +4029,6 @@ Transform:
   - {fileID: 31597542}
   - {fileID: 190635695}
   - {fileID: 1536708889}
-  - {fileID: 862155676}
-  - {fileID: 1065717982}
   m_Father: {fileID: 317921530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &229116359
@@ -17038,7 +17036,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 229116358}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &862155677
 MonoBehaviour:
@@ -21830,7 +21828,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1458807900}
-  m_Father: {fileID: 229116358}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1065717983
 SpriteRenderer:
@@ -35016,6 +35014,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1634067800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1634067801}
+  m_Layer: 0
+  m_Name: CameraBoundary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1634067801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634067800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.14209, y: -1.8008, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1641429077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40324,6 +40353,8 @@ MonoBehaviour:
   wood: {fileID: 11400000, guid: 5b4d9c1d9db18b440b4d45f6bab62a97, type: 2}
   stone: {fileID: 11400000, guid: 302f57c16f1832f4b9b12d34d0df2979, type: 2}
   iron: {fileID: 11400000, guid: 6ea6c35e92d5a2a4a8bdaa6fceab7fff, type: 2}
+  TomatoSeed: {fileID: 0}
+  WheatSeed: {fileID: 0}
   slots: []
 --- !u!1 &1838856627
 GameObject:
@@ -46944,3 +46975,6 @@ SceneRoots:
   - {fileID: 1327861620}
   - {fileID: 1103435454}
   - {fileID: 317921530}
+  - {fileID: 1634067801}
+  - {fileID: 862155676}
+  - {fileID: 1065717982}
