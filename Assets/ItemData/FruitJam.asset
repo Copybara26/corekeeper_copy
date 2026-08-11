@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Fruit jam
   description: "\uACFC\uC77C \uBCA0\uB9AC \uC7BC"
   icon: {fileID: 4282538838841783409, guid: 6dc5eedcc81e87d42a2dec62463a83d6, type: 3}
+  isEdible: 1
+  healAmount: 2

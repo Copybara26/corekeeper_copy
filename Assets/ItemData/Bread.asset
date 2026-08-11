@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Bread
   description: "\uC2DD\uBE75"
   icon: {fileID: 4230105638298585596, guid: dc9a1b763bdf59d4380811fa5f7b9268, type: 3}
+  isEdible: 1
+  healAmount: 2

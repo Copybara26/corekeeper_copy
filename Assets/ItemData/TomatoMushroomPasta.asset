@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Tomato Mushroom Pasta
   description: "\uD1A0\uB9C8\uD1A0 \uBC84\uC12F \uD30C\uC2A4\uD0C0"
   icon: {fileID: -7754782611642097118, guid: 572ecaa56a6e9504780bcbda6dd50b98, type: 3}
+  isEdible: 1
+  healAmount: 2

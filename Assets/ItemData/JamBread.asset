@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: JamBread
   description: "\uC7BC \uBE75"
   icon: {fileID: -6013605316358289227, guid: f74b2629ff4b6cd46972518ba41c2ce6, type: 3}
+  isEdible: 1
+  healAmount: 2

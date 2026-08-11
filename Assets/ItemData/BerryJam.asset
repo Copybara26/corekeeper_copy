@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: berry jam
   description: "\uBCA0\uB9AC \uC7BC"
   icon: {fileID: 3160445227514698109, guid: d34948198c5ed934484d83ebba25e633, type: 3}
+  isEdible: 1
+  healAmount: 2

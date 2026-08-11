@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Tomato Bread/Pie
   description: " \uD1A0\uB9C8\uD1A0 \uD30C\uC774/\uC0CC\uB4DC\uC704\uCE58"
   icon: {fileID: -7462744093848623810, guid: 7a09349e0e980c645b905b043b5c3cf0, type: 3}
+  isEdible: 1
+  healAmount: 2

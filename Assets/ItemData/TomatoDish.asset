@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Tomato Dish
   description: "\uD1A0\uB9C8\uD1A0 \uC218\uD504/\uC870\uB9BC"
   icon: {fileID: -4022848644241972155, guid: 3f79c7e1d5196674183702be30ced963, type: 3}
+  isEdible: 1
+  healAmount: 2

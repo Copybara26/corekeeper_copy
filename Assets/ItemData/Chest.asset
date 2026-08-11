@@ -16,3 +16,5 @@ MonoBehaviour:
   description: "\uB2E4\uC591\uD55C \uC544\uC774\uD15C\uC744 \uBCF4\uAD00\uD560 \uC218
     \uC788\uB294 \uBAA9\uC7AC \uC0C1\uC790"
   icon: {fileID: -5281422124547630143, guid: fc85bbcd04c06614784a368935e53307, type: 3}
+  isEdible: 0
+  healAmount: 0

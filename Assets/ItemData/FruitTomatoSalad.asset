@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Fruit Tomato Salad
   description: "\uACFC\uC77C \uD1A0\uB9C8\uD1A0 \uC0D0\uB7EC\uB4DC"
   icon: {fileID: 2797544923012390431, guid: 666c78511d66e2e4686b9850fe4adde6, type: 3}
+  isEdible: 1
+  healAmount: 2
