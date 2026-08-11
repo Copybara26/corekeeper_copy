@@ -33,6 +33,13 @@ public class CookingUI : MonoBehaviour
     {
         if (item == null) return;
 
+        // 💡 식재료(healAmount가 1인 아이템)가 아니면 요리솥에 안 들어가게 거름
+        if (item.healAmount != 1)
+        {
+            Debug.Log("식재료만 요리솥에 넣을 수 있습니다!");
+            return;
+        }
+
         // Slot 1이 비어있는 경우
         if (ingredient1 == null)
         {

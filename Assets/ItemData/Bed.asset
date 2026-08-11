@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: "\uCE68\uB300"
   description: 
   icon: {fileID: -51583022960980054, guid: 47ffb049c11eb2b41b9b15e577be16af, type: 3}
+  isEdible: 0
+  healAmount: 0

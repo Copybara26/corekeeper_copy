@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Rich Mushroom Rice
   description: "\uC9C4\uD55C \uBC84\uC12F \uB36E\uBC25"
   icon: {fileID: 195168980708153974, guid: 489b2c6105597044f9ef4fb676daf48c, type: 3}
+  isEdible: 1
+  healAmount: 2

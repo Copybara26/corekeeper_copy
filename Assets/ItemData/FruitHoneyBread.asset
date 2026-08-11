@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Fruit Honey Bread
   description: "\uACFC\uC77C \uD0C0\uB974\uD2B8/\uBE75"
   icon: {fileID: 8597656116119080788, guid: 9813139256c59c848b4b5c90bfd1acc2, type: 3}
+  isEdible: 1
+  healAmount: 2

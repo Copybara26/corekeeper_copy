@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: "\uB3CC"
   description: "\uB3CC\uC744 \uCC44\uC9D1\uD574\uC11C \uC5BB\uB294 \uC7AC\uB8CC"
   icon: {fileID: -719700017475550282, guid: c17889b3625f016418d7bcb66e26fc64, type: 3}
+  isEdible: 0
+  healAmount: 0

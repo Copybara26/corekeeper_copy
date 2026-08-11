@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Mushroom Pie
   description: "\uBC84\uC12F \uD30C\uC774/\uB9AC\uC870\uB610"
   icon: {fileID: -2045263470437689712, guid: 658fe8b12b4a56b489ce9d9a4cfc8eac, type: 3}
+  isEdible: 1
+  healAmount: 2

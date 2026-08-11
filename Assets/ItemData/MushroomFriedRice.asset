@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Mushroom Fried Rice
   description: "\uBC84\uC12F \uBCF6\uC74C\uBC25"
   icon: {fileID: 1783049803911924095, guid: c468d2368f4e0384aa263c1bd7230cbf, type: 3}
+  isEdible: 1
+  healAmount: 2

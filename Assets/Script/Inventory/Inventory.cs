@@ -151,4 +151,19 @@ public class Inventory : MonoBehaviour
         OnInventoryChanged?.Invoke();
         return true;
     }
+
+    public void UseItem(ItemData item)
+    {
+        if (item == null || !item.isEdible) return;
+
+        // 체력이 꽉 차지 않았을 때만 사용 가능
+        if (HealthUI.Instance != null && HealthUI.Instance.currentHealth < HealthUI.Instance.maxHealth)
+        {
+            // 1. 체력 회복
+            HealthUI.Instance.Heal(item.healAmount);
+
+            // 2. 인벤토리에서 해당 아이템 1개 차감 (슬롯 0개 되면 자동 삭제 및 UI 갱신)
+            RemoveItem(item, 1);
+        }
+    }
 }

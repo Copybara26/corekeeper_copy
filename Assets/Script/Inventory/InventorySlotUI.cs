@@ -55,30 +55,39 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
     // [요리/상호작용 기능 추가] 슬롯 클릭 시 요리창으로 아이템 전달
     public void OnPointerClick(PointerEventData eventData)
     {
-        // 마우스 왼쪽 클릭만 처리
-        if (eventData.button != PointerEventData.InputButton.Left)
+        // 1. 마우스 우클릭 처리 (음식 섭취)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
-            return;
+            if (currentSlotData != null && currentSlotData.item != null)
+            {
+                Inventory.Instance.UseItem(currentSlotData.item);
+            }
+            return; // 우클릭 시 아래 좌클릭 로직은 실행하지 않고 종료
         }
 
-        // 클릭한 인벤토리 슬롯 선택
-        if (Inventory.Instance != null)
+        // 2. 마우스 좌클릭 처리 (슬롯 선택 & 요리재료 추가)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Inventory.Instance.SelectSlot(slotIndex);
-        }
+            // 클릭한 인벤토리 슬롯 선택 (선택 테두리)
+            if (Inventory.Instance != null)
+            {
+                Inventory.Instance.SelectSlot(slotIndex);
+            }
 
-        if (currentSlotData == null || currentSlotData.item == null)
-        {
-            return;
-        }
+            if (currentSlotData == null || currentSlotData.item == null)
+            {
+                return;
+            }
 
-        if (CookingUI.Instance != null &&
-            CookingUI.Instance.cookingWindow != null &&
-            CookingUI.Instance.cookingWindow.activeSelf)
-        {
-            CookingUI.Instance.TryAddIngredient(
-                currentSlotData.item
-            );
+            // 요리 창이 열려있다면 요리 재료로 투입
+            if (CookingUI.Instance != null &&
+                CookingUI.Instance.cookingWindow != null &&
+                CookingUI.Instance.cookingWindow.activeSelf)
+            {
+                CookingUI.Instance.TryAddIngredient(currentSlotData.item);
+            }
         }
     }
+
+
 }

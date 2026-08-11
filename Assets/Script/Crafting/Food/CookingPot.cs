@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems; // 필수 추가
 
-public class CookingPot : MonoBehaviour
+public class CookingPot : MonoBehaviour, IPointerClickHandler
 {
     [Header("현재 요리 상태")]
     public bool isCooking = false;
@@ -18,8 +19,11 @@ public class CookingPot : MonoBehaviour
             resultSpriteRenderer.gameObject.SetActive(false);
     }
 
-    private void OnMouseDown()
+    // OnMouseDown 대신 OnPointerClick 사용
+    public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("[CookingPot] 클릭 감지됨!");
+
         if (CraftingUI.Instance != null && CraftingUI.Instance.craftingWindow != null && CraftingUI.Instance.craftingWindow.activeSelf)
             return;
 
@@ -32,30 +36,26 @@ public class CookingPot : MonoBehaviour
             return;
         }
 
-        if (hasFinishedFood)
+        if (CookingUI.Instance != null)
         {
-            if (CookingUI.Instance != null && CookingUI.Instance.IsNearCookingPot())
-            {
-                CollectFood();
-            }
-            return;
-        }
+            bool isNear = CookingUI.Instance.IsNearCookingPot();
 
-        if (CookingUI.Instance != null && CookingUI.Instance.IsNearCookingPot())
-        {
-            CookingUI.Instance.OpenCookingUI(this);
+            if (hasFinishedFood)
+            {
+                if (isNear) CollectFood();
+                return;
+            }
+
+            if (isNear)
+            {
+                CookingUI.Instance.OpenCookingUI(this);
+            }
         }
     }
 
     public void StartCooking(CookingRecipe recipe)
     {
-        // 💡 recipe가 null인 경우 사전 차단
-        if (recipe == null || recipe.resultItem == null)
-        {
-            Debug.LogError("시작하려는 레시피 또는 완성 아이템(resultItem) 정보가 null입니다.");
-            return;
-        }
-
+        if (recipe == null || recipe.resultItem == null) return;
         StartCoroutine(CookCoroutine(recipe));
     }
 
@@ -67,22 +67,17 @@ public class CookingPot : MonoBehaviour
         if (CookingUI.Instance != null)
             CookingUI.Instance.CloseCookingUI();
 
-        Debug.Log("요리를 시작합니다...");
-
         float duration = recipe.cookTime > 0 ? recipe.cookTime : 3f;
         yield return new WaitForSeconds(duration);
 
         isCooking = false;
         hasFinishedFood = true;
 
-        // 💡 요리 완료 시 위에 아이콘 표시 (Null 체크 강화)
         if (currentRecipe != null && currentRecipe.resultItem != null && resultSpriteRenderer != null)
         {
             resultSpriteRenderer.sprite = currentRecipe.resultItem.icon;
             resultSpriteRenderer.gameObject.SetActive(true);
         }
-
-        Debug.Log($"요리 완료! 요리솥 위에 {recipe.resultItem.itemName} 생성됨.");
     }
 
     private void CollectFood()
@@ -92,7 +87,6 @@ public class CookingPot : MonoBehaviour
             if (Inventory.Instance != null)
             {
                 Inventory.Instance.AddItem(currentRecipe.resultItem, currentRecipe.resultAmount);
-                Debug.Log($"[획득] {currentRecipe.resultItem.itemName} x{currentRecipe.resultAmount}");
             }
         }
 

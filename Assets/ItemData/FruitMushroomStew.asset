@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: FruitMushroomStew
   description: "\uACFC\uC77C \uBC84\uC12F \uC2A4\uD29C"
   icon: {fileID: -2769864978305014173, guid: a6ce9b13360d3324d9c543b864ef069a, type: 3}
+  isEdible: 1
+  healAmount: 2

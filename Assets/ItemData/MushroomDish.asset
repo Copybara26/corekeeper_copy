@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Mushroom Dish
   description: "\uBC84\uC12F \uAD6C\uC774/\uC2A4\uD29C"
   icon: {fileID: 2195076104310453271, guid: 3e94b0ece7f60324ab2fe769c6b55c87, type: 3}
+  isEdible: 1
+  healAmount: 2

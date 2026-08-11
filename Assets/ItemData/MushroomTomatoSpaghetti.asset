@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Mushroom Tomato Spaghetti
   description: "\uBC84\uC12F \uD1A0\uB9C8\uD1A0 \uC2A4\uD30C\uAC8C\uD2F0"
   icon: {fileID: -8999946572596086950, guid: 9c54c0e0725587d45a137076887abf90, type: 3}
+  isEdible: 1
+  healAmount: 2

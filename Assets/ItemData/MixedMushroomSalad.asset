@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Mixed Mushroom Salad
   description: "\uBAA8\uB4EC \uBC84\uC12F \uC0D0\uB7EC\uB4DC"
   icon: {fileID: 1859310186726053386, guid: 93fe127e14346c84a9ccda2ee9ac62e6, type: 3}
+  isEdible: 1
+  healAmount: 2

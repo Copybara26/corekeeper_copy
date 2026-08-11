@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: RedBerrySalad
   description: "\uBD89\uC740 \uBCA0\uB9AC \uBAA8\uB4EC \uC0D0\uB7EC\uB4DC"
   icon: {fileID: -5212104927784503337, guid: 46747eb427e3fcd40873bce079c2d717, type: 3}
+  isEdible: 1
+  healAmount: 2

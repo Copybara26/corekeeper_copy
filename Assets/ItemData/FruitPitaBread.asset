@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Fruit Pita Bread
   description: "\uACFC\uC77C \uD30C\uC774/\uBE75"
   icon: {fileID: 8444149544506327597, guid: 634bec3c84247a848bad787cf30e73e5, type: 3}
+  isEdible: 1
+  healAmount: 2
