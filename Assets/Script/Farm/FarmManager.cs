@@ -19,6 +19,7 @@ public class FarmManager : MonoBehaviour
     [SerializeField] private float ResourceCheckRadius = 0.35f;
 
     [SerializeField] private LayerMask farmPlotLayer;
+    [SerializeField] private LayerMask interactableLayer;
 
     private Camera mainCamera;
 
@@ -174,6 +175,18 @@ public class FarmManager : MonoBehaviour
             mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         mousePosition.z = 0f;
+
+        // ★ 요리대, 제작대 등 상호작용 오브젝트면 농사 처리 안 함
+        Collider2D interactable = Physics2D.OverlapPoint(
+            mousePosition,
+            interactableLayer
+        );
+
+        if (interactable != null)
+        {
+            Debug.Log($"상호작용 오브젝트 클릭: {interactable.name}");
+            return;
+        }
 
         Collider2D[] hits =
             Physics2D.OverlapPointAll(mousePosition);
