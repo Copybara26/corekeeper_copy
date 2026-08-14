@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 75, y: 80}
+  m_SizeDelta: {x: 95, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8654034457357399278
 CanvasRenderer:
@@ -227,6 +227,8 @@ MonoBehaviour:
   craftButton: {fileID: 3256272896300753871}
   canvasGroup: {fileID: 0}
   selectionFrame: {fileID: 2371455816031234986}
+  tooltipPrefab: {fileID: 5132042853151971814, guid: 19392671314db494e915eb8a8ed0de9e, type: 3}
+  slotSpacerPrefab: {fileID: 5398109626563486031, guid: 3d32e03a698845041a3cd8b261371ac2, type: 3}
 --- !u!1 &7445998862124492995
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +264,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1066435851056950891
 CanvasRenderer:
