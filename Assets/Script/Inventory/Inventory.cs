@@ -156,8 +156,7 @@ public class Inventory : MonoBehaviour
     {
         if (item == null || !item.isEdible) return;
 
-        // 체력이 꽉 차지 않았을 때만 사용 가능
-        if (HealthUI.Instance != null && HealthUI.Instance.currentHealth < HealthUI.Instance.maxHealth)
+        if (HealthUI.Instance != null)
         {
             // 1. 체력 회복
             HealthUI.Instance.Heal(item.healAmount);
