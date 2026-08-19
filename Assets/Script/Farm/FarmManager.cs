@@ -110,7 +110,7 @@ public class FarmManager : MonoBehaviour
             ResourceLayer
         );
 
-        if (Resource != null)
+        if (Resource != null && !Resource.CompareTag("Player"))
         {
             Debug.Log($"장애물 때문에 경작 불가: {Resource.name}");
             return;
@@ -171,6 +171,28 @@ public class FarmManager : MonoBehaviour
 
     private void HandleFarmClick()
     {
+        if (BuildingManager.Instance != null &&
+            BuildingManager.Instance.isBuildMode)
+        {
+            return;
+        }
+
+        // 제작 UI가 열려 있으면 농사 클릭 막기
+        if (CraftingUI.Instance != null &&
+            CraftingUI.Instance.craftingWindow != null &&
+            CraftingUI.Instance.craftingWindow.activeSelf)
+        {
+            return;
+        }
+
+        // 요리 UI가 열려 있으면 농사 클릭 막기
+        if (CookingUI.Instance != null &&
+            CookingUI.Instance.cookingWindow != null &&
+            CookingUI.Instance.cookingWindow.activeSelf)
+        {
+            return;
+        }
+
         Vector3 mousePosition =
             mainCamera.ScreenToWorldPoint(Input.mousePosition);
 

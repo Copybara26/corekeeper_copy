@@ -17,3 +17,5 @@ MonoBehaviour:
   icon: {fileID: -6460662388332757260, guid: 47ffb049c11eb2b41b9b15e577be16af, type: 3}
   isEdible: 0
   healAmount: 0
+  isBuildingItem: 1
+  buildingPrefab: {fileID: 955476069018633676, guid: 2de1b1e5ed6f61f4f91d613921e301ce, type: 3}

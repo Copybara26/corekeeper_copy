@@ -17,4 +17,8 @@ public class ItemData : ScriptableObject
     [Header("음식/회복 설정")]
     public bool isEdible = false; // 먹을 수 있는 아이템인지 체크 (식재료, 요리 등)
     public int healAmount = 1;    // 회복량 (1 = 하트 반 칸, 2 = 하트 한 칸)
+
+    [Header("건축")]
+    public bool isBuildingItem;
+    public GameObject buildingPrefab;
 }

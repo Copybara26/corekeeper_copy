@@ -85,7 +85,20 @@ public class CraftingManager : MonoBehaviour
         }
 
         // 3. 인벤토리에 결과 아이템 추가
-        Inventory.Instance.AddItem(recipe.resultItem, recipe.resultAmount);
+        if (recipe.resultItem.isBuildingItem)
+        {
+            BuildingInventory.Instance.AddItem(
+                recipe.resultItem,
+                recipe.resultAmount
+            );
+        }
+        else
+        {
+            Inventory.Instance.AddItem(
+                recipe.resultItem,
+                recipe.resultAmount
+            );
+        }
 
         // 4. 성공 디버그 로그 출력
         Debug.Log($"<color=#00FF00>[제작 완료]</color> '{recipe.resultItem.itemName}' {recipe.resultAmount}개 획득!");

@@ -38,8 +38,8 @@ public class Inventory : MonoBehaviour
     {
         SelectedSlotIndex = 0;
 
-        AddItem(TomatoSeed, 5);
-        AddItem(WheatSeed, 5);
+        bool added = AddItem(TomatoSeed, 5);
+        added = AddItem(WheatSeed, 5);
 
         OnInventoryChanged?.Invoke();
     }
@@ -95,11 +95,11 @@ public class Inventory : MonoBehaviour
         OnInventoryChanged?.Invoke();
     }
 
-    public void AddItem(ItemData item, int amount)
+    public bool AddItem(ItemData item, int amount)
     {
         if (item == null || amount <= 0)
         {
-            return;
+            return false;
         }
 
         InventorySlotData existingSlot =
@@ -108,7 +108,7 @@ public class Inventory : MonoBehaviour
         if (existingSlot == null && slots.Count >= MAX_SLOT)
         {
             Debug.Log("인벤토리가 가득 찼습니다.");
-            return;
+            return false;
         }
 
         if (existingSlot != null)
@@ -121,6 +121,39 @@ public class Inventory : MonoBehaviour
         }
 
         OnInventoryChanged?.Invoke();
+
+        return true;
+    }
+
+    public bool CanAddItems(List<ItemData> items)
+    {
+        if (items == null)
+            return false;
+
+        int emptySlots = MAX_SLOT - slots.Count;
+
+        List<ItemData> newItems = new List<ItemData>();
+
+        foreach (ItemData item in items)
+        {
+            if (item == null)
+                continue;
+
+            // 이미 인벤토리에 있으면 새 슬롯 필요 없음
+            bool alreadyInInventory =
+                slots.Exists(slot => slot.item == item);
+
+            if (alreadyInInventory)
+                continue;
+
+            // 이번에 추가될 목록에서 이미 센 아이템이면 또 세지 않음
+            if (newItems.Contains(item))
+                continue;
+
+            newItems.Add(item);
+        }
+
+        return newItems.Count <= emptySlots;
     }
 
     public int GetItemAmount(ItemData item)

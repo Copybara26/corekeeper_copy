@@ -8,6 +8,12 @@ public class CraftingStation : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("[CraftingStation] 클릭 감지됨!");
 
+        if (BuildingManager.Instance != null &&
+            BuildingManager.Instance.isBuildMode)
+        {
+            return;
+        }
+
         if (CookingUI.Instance != null && CookingUI.Instance.cookingWindow != null && CookingUI.Instance.cookingWindow.activeSelf)
             return;
 

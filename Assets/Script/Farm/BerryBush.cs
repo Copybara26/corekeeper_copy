@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BerryBush : MonoBehaviour
@@ -77,6 +78,14 @@ public class BerryBush : MonoBehaviour
             return;
         }
 
+        // 베리가 들어갈 공간이 없으면 수확하지 않음
+        if (!Inventory.Instance.CanAddItems(
+            new List<ItemData> { berryItem }))
+        {
+            Debug.Log("인벤토리가 가득 차서 베리를 수확할 수 없습니다.");
+            return;
+        }
+
         int minimum = Mathf.Max(1, minBerryAmount);
         int maximum = Mathf.Max(minimum, maxBerryAmount);
 
@@ -85,10 +94,17 @@ public class BerryBush : MonoBehaviour
             maximum + 1
         );
 
-        Inventory.Instance.AddItem(
+        bool added = Inventory.Instance.AddItem(
             berryItem,
             berryAmount
         );
+
+        // 혹시 AddItem이 실패해도 덤불 상태 유지
+        if (!added)
+        {
+            Debug.Log("베리 획득 실패");
+            return;
+        }
 
         Debug.Log(
             $"{berryItem.itemName} {berryAmount}개 획득"

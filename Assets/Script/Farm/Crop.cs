@@ -94,6 +94,13 @@ public class Crop : MonoBehaviour
             return;
         }
 
+        // 수확 아이템이 들어갈 공간 검사
+        if (!CanHarvest())
+        {
+            Debug.Log("[중단] 인벤토리가 가득 차서 수확할 수 없습니다.");
+            return;
+        }
+
         isHarvested = true;
 
         Debug.Log("[3] 드랍 처리 시작");
@@ -115,6 +122,24 @@ public class Crop : MonoBehaviour
         Debug.Log("[6] 작물 제거");
 
         Destroy(gameObject);
+    }
+
+    private bool CanHarvest()
+    {
+        if (Inventory.Instance == null)
+            return false;
+
+        List<ItemData> itemsToAdd = new List<ItemData>();
+
+        foreach (DropItem drop in harvestDrops)
+        {
+            if (drop == null || drop.item == null)
+                continue;
+
+            itemsToAdd.Add(drop.item);
+        }
+
+        return Inventory.Instance.CanAddItems(itemsToAdd);
     }
 
     private void DropHarvestItems()
@@ -155,11 +180,12 @@ public class Crop : MonoBehaviour
                 $"AddItem 호출 직전: {drop.item.itemName} {amount}개"
             );
 
-            Inventory.Instance.AddItem(drop.item, amount);
+            bool added = Inventory.Instance.AddItem(drop.item, amount);
 
-            Debug.Log(
-                $"AddItem 호출 완료: {drop.item.itemName} {amount}개"
-            );
+            if (!added)
+            {
+                Debug.Log($"인벤토리가 가득 차서 {drop.item.itemName} 획득 실패");
+            }
         }
     }
 }
