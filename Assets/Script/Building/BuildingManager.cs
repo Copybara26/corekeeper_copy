@@ -15,7 +15,13 @@ public class BuildingManager : MonoBehaviour
     private GameObject previewObject;
     private SpriteRenderer previewRenderer;
 
-    private bool isBuildMode;
+    [Header("건축 모드 UI")]
+    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject buildingInventoryUI;
+
+    [SerializeField] private BuildingInventoryUI buildingInventoryUIController;
+
+    public bool isBuildMode;
     private bool canPlace = true;
 
     private void Awake()
@@ -23,11 +29,29 @@ public class BuildingManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        inventoryUI.SetActive(true);
+        buildingInventoryUI.SetActive(false);
+
+        if (buildingInventoryUIController != null)
+        {
+            buildingInventoryUIController.OnSelectionChanged += RefreshPreview;
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            ToggleBuildMode();
+            if (isBuildMode)
+            {
+                ExitBuildMode();
+            }
+            else
+            {
+                EnterBuildMode();
+            }
         }
 
         if (!isBuildMode || previewObject == null)
@@ -40,7 +64,7 @@ public class BuildingManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
             PlaceBuilding();
-            ExitBuildMode();
+            RefreshPreview();
         }
     }
 
@@ -87,8 +111,17 @@ public class BuildingManager : MonoBehaviour
 
     private void PlaceBuilding()
     {
+        ItemData selectedItem =
+            buildingInventoryUIController.GetSelectedItem();
+
+        if (selectedItem == null ||
+            selectedItem.buildingPrefab == null)
+        {
+            return;
+        }
+
         GameObject placedBuilding = Instantiate(
-            chickenHousePrefab,
+            selectedItem.buildingPrefab,
             previewObject.transform.position,
             Quaternion.identity
         );
@@ -100,11 +133,29 @@ public class BuildingManager : MonoBehaviour
         {
             placedRenderer.color = Color.white;
         }
+
+        BuildingInventory.Instance.RemoveItem(
+            selectedItem,
+            1
+        );
+    }
+
+    private void EnterBuildMode()
+    {
+        isBuildMode = true;
+
+        inventoryUI.SetActive(false);
+        buildingInventoryUI.SetActive(true);
+
+        RefreshPreview();
     }
 
     private void ExitBuildMode()
     {
         isBuildMode = false;
+
+        inventoryUI.SetActive(true);
+        buildingInventoryUI.SetActive(false);
 
         if (previewObject != null)
         {
@@ -128,5 +179,42 @@ public class BuildingManager : MonoBehaviour
         );
 
         canPlace = hit == null;
+    }
+
+    private void RefreshPreview()
+    {
+        if (!isBuildMode)
+            return;
+
+        if (previewObject != null)
+        {
+            Destroy(previewObject);
+            previewObject = null;
+        }
+
+        ItemData selectedItem =
+            buildingInventoryUIController.GetSelectedItem();
+
+        if (selectedItem == null ||
+            selectedItem.buildingPrefab == null)
+        {
+            previewRenderer = null;
+            return;
+        }
+
+        previewObject = Instantiate(selectedItem.buildingPrefab);
+
+        previewRenderer =
+            previewObject.GetComponent<SpriteRenderer>();
+
+        Collider2D previewCollider =
+            previewObject.GetComponent<Collider2D>();
+
+        if (previewCollider != null)
+        {
+            previewCollider.enabled = false;
+        }
+
+        FollowMouse();
     }
 }

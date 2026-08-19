@@ -24,6 +24,12 @@ public class CookingPot : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("[CookingPot] 클릭 감지됨!");
 
+        if (BuildingManager.Instance != null &&
+            BuildingManager.Instance.isBuildMode)
+        {
+            return;
+        }
+
         if (CraftingUI.Instance != null && CraftingUI.Instance.craftingWindow != null && CraftingUI.Instance.craftingWindow.activeSelf)
             return;
 
@@ -82,14 +88,25 @@ public class CookingPot : MonoBehaviour, IPointerClickHandler
 
     private void CollectFood()
     {
-        if (currentRecipe != null && currentRecipe.resultItem != null)
+        if (currentRecipe == null || currentRecipe.resultItem == null)
+            return;
+
+        if (Inventory.Instance == null)
+            return;
+
+        bool added = Inventory.Instance.AddItem(
+            currentRecipe.resultItem,
+            currentRecipe.resultAmount
+        );
+
+        // 인벤토리가 꽉 찼으면 음식 유지
+        if (!added)
         {
-            if (Inventory.Instance != null)
-            {
-                Inventory.Instance.AddItem(currentRecipe.resultItem, currentRecipe.resultAmount);
-            }
+            Debug.Log("인벤토리가 가득 차서 요리를 가져갈 수 없습니다.");
+            return;
         }
 
+        // 여기까지 왔다는 건 정상적으로 인벤토리에 들어간 것
         hasFinishedFood = false;
         currentRecipe = null;
 
