@@ -72,7 +72,7 @@ public class CookingUI : MonoBehaviour
 
         if (Inventory.Instance != null)
         {
-            Inventory.Instance.AddItem(ingredient1, 1); // 인벤토리에 다시 1개 추가
+            bool added = Inventory.Instance.AddItem(ingredient1, 1); // 인벤토리에 다시 1개 추가
         }
 
         ingredient1 = null; // 슬롯 데이터 비우기
@@ -86,7 +86,7 @@ public class CookingUI : MonoBehaviour
 
         if (Inventory.Instance != null)
         {
-            Inventory.Instance.AddItem(ingredient2, 1); // 인벤토리에 다시 1개 추가
+            bool added = Inventory.Instance.AddItem(ingredient2, 1); // 인벤토리에 다시 1개 추가
         }
 
         ingredient2 = null; // 슬롯 데이터 비우기

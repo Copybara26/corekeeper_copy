@@ -15,6 +15,42 @@ public class FarmPlot : MonoBehaviour
 
     private GameObject currentCrop;
 
+    [SerializeField] private float resetTime = 20f;
+
+    private Coroutine resetCoroutine;
+
+    private void Start()
+    {
+        StartResetTimer();
+    }
+
+    private void StartResetTimer()
+    {
+        if (resetCoroutine != null)
+            StopCoroutine(resetCoroutine);
+
+        resetCoroutine = StartCoroutine(ResetSoilCoroutine());
+    }
+
+    private IEnumerator ResetSoilCoroutine()
+    {
+        yield return new WaitForSeconds(resetTime);
+
+        if (!hasCrop)
+        {
+            FarmManager.Instance.RemoveTilledSoilAtWorldPosition(transform.position);
+        }
+    }
+
+    private IEnumerator ResetHasCropNextFrame()
+    {
+        yield return null;
+
+        hasCrop = false;
+
+        StartResetTimer();
+    }
+
     //private void OnMouseDown()
     //{
     //    TryPlant();
@@ -79,12 +115,19 @@ public class FarmPlot : MonoBehaviour
         hasCrop = true;
 
         Debug.Log($"{selectedItem.itemName} 심기 완료");
+
+        if (resetCoroutine != null)
+        {
+            StopCoroutine(resetCoroutine);
+            resetCoroutine = null;
+        }
     }
 
     public void CropHarvested()
     {
         currentCrop = null;
         StartCoroutine(UnlockPlotNextFrame());
+        StartCoroutine(ResetHasCropNextFrame());
     }
 
     private IEnumerator UnlockPlotNextFrame()

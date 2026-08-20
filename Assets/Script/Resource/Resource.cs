@@ -53,6 +53,19 @@ public class Resource : MonoBehaviour
             return;
         }
 
+        if (BuildingManager.Instance != null &&
+            BuildingManager.Instance.isBuildMode)
+        {
+            return;
+        }
+
+        // 인벤토리에 자원 들어갈 칸이 없으면 채집 자체를 막음
+        if (!CanReceiveDrops())
+        {
+            Debug.Log("인벤토리가 가득 차서 자원을 캘 수 없습니다.");
+            return;
+        }
+
         // 자원 타격에 사용된 클릭으로 땅까지 갈리지 않게 함
         if (FarmManager.Instance != null)
         {
@@ -128,7 +141,7 @@ public class Resource : MonoBehaviour
                 maximum + 1
             );
 
-            Inventory.Instance.AddItem(
+            bool added = Inventory.Instance.AddItem(
                 drop.item,
                 amount
             );
@@ -199,5 +212,25 @@ public class Resource : MonoBehaviour
         isBroken = false;
 
         Debug.Log($"{gameObject.name} 리젠 완료");
+    }
+
+    private bool CanReceiveDrops()
+    {
+        if (Inventory.Instance == null)
+            return false;
+
+        foreach (DropItem drop in drops)
+        {
+            if (drop == null || drop.item == null)
+                continue;
+
+            if (!Inventory.Instance.CanAddItems(
+                new List<ItemData> { drop.item }))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
