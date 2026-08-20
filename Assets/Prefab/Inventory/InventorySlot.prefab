@@ -233,6 +233,7 @@ MonoBehaviour:
   itemIcon: {fileID: 5643104962977167451}
   amountText: {fileID: 4566322664341191313}
   selectionFrame: {fileID: 6649355203642879257}
+  tooltipPrefab: {fileID: 4192050506635783825, guid: 8e09fa319298e4544861110b021f98af, type: 3}
 --- !u!1 &6649355203642879257
 GameObject:
   m_ObjectHideFlags: 0

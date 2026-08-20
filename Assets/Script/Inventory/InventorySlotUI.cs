@@ -1,19 +1,22 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
+public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image itemIcon;
     [SerializeField] private TMP_Text amountText;
     [SerializeField] private GameObject selectionFrame;
 
-    // 이 UI가 몇 번째 슬롯인지 저장
-    private int slotIndex;
+    [Header("툴팁 프리팹 연결")]
+    [SerializeField] private InventoryItemTooltip tooltipPrefab; // 👈 툴팁 프리팹 연결
 
-    // [요리/상호작용 기능 추가] 현재 슬롯의 데이터 기억용 변수
+    private int slotIndex;
     private InventorySlotData currentSlotData;
+
+    // 현재 슬롯에서 생성된 툴팁 인스턴스 보관용 static (다른 슬롯에 마우스 가면 이전 것 삭제용)
+    private static InventoryItemTooltip activeTooltip;
 
     public void SetIndex(int index)
     {
@@ -22,7 +25,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 
     public void SetSlot(InventorySlotData slotData)
     {
-        currentSlotData = slotData; // 👈 [요리/상호작용 기능 추가]
+        currentSlotData = slotData;
 
         if (slotData == null || slotData.item == null)
         {
@@ -37,11 +40,14 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 
     public void ClearSlot()
     {
-        currentSlotData = null; // 👈 [요리/상호작용 기능 추가]
+        currentSlotData = null;
 
         itemIcon.enabled = false;
         itemIcon.sprite = null;
         amountText.text = string.Empty;
+
+        // 슬롯 비워질 때 툴팁도 제거
+        DestroyActiveTooltip();
     }
 
     public void SetSelected(bool selected)
@@ -52,34 +58,32 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // [요리/상호작용 기능 추가] 슬롯 클릭 시 요리창으로 아이템 전달
     public void OnPointerClick(PointerEventData eventData)
     {
-        // 1. 마우스 우클릭 처리 (음식 섭취)
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (currentSlotData != null && currentSlotData.item != null)
             {
                 Inventory.Instance.UseItem(currentSlotData.item);
+
+                // 아이템을 먹어서 슬롯이 비워졌을 수 있으므로 툴팁 파괴
+                if (currentSlotData == null || currentSlotData.item == null)
+                {
+                    DestroyActiveTooltip();
+                }
             }
-            return; // 우클릭 시 아래 좌클릭 로직은 실행하지 않고 종료
+            return;
         }
 
-        // 2. 마우스 좌클릭 처리 (슬롯 선택 & 요리재료 추가)
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            // 클릭한 인벤토리 슬롯 선택 (선택 테두리)
             if (Inventory.Instance != null)
             {
                 Inventory.Instance.SelectSlot(slotIndex);
             }
 
-            if (currentSlotData == null || currentSlotData.item == null)
-            {
-                return;
-            }
+            if (currentSlotData == null || currentSlotData.item == null) return;
 
-            // 요리 창이 열려있다면 요리 재료로 투입
             if (CookingUI.Instance != null &&
                 CookingUI.Instance.cookingWindow != null &&
                 CookingUI.Instance.cookingWindow.activeSelf)
@@ -89,5 +93,39 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    // 마우스 진입 시 툴팁 생성
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("마우스 올림!"); // 👈 콘솔에 뜨는지 확인용
 
+        if (currentSlotData != null && currentSlotData.item != null && tooltipPrefab != null)
+        {
+            DestroyActiveTooltip();
+
+            Canvas parentCanvas = GetComponentInParent<Canvas>();
+            Transform canvasTransform = parentCanvas != null ? parentCanvas.transform : transform.parent;
+
+            // 1. 툴팁 생성
+            activeTooltip = Instantiate(tooltipPrefab, canvasTransform, false);
+            activeTooltip.transform.SetAsLastSibling();
+
+            // 2. 슬롯 위치(transform)와 아이템 데이터 전달
+            activeTooltip.SetPositionAndSetup(transform, currentSlotData.item);
+        }
+    }
+
+    // 마우스 이탈 시 툴팁 파괴
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        DestroyActiveTooltip();
+    }
+
+    private void DestroyActiveTooltip()
+    {
+        if (activeTooltip != null)
+        {
+            Destroy(activeTooltip.gameObject);
+            activeTooltip = null;
+        }
+    }
 }
